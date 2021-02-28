@@ -7,24 +7,24 @@ from datetime import datetime
 
 token = ""
 
-def human_size(bytes, units=[' bytes','KB','MB','GB','TB', 'PB', 'EB']):
-    return str(bytes) + units[0] if bytes < 1024 else human_size(bytes>>10, units[1:]) if units[1:] else f'{bytes>>10}ZB'
+def human_size(bytes, units=[" bytes","KB","MB","GB","TB","PB","EB"]):
+    return str(bytes) + units[0] if bytes < 1024 else human_size(bytes>>10, units[1:]) if units[1:] else f'{bytes>>10}ZB"
 
 def setup():
-    if exists('key.txt'):
-        remove('key.txt')
+    if exists("key.txt"):
+        remove("key.txt")
     print("> Welcome to the configuration menu, for the software to work properly, you need your GitHub access token, to retrieve it please refer to the following help site: https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token you will need to copy the generated token and put it below (Please uncheck all options when creating your token, gitReleaser doesn't need it).")
-    token = input('\n> Enter your GitHub access token: ')
+    token = input("\n> Enter your GitHub access token: ")
     while not checkKey(token):
-        print('> The GitHub access token you specified is incorrect, please specify a correct one.')
-        token = input('> Enter your GitHub access token: ')
-    print('> Perfect! The access token that you specified is correct, and you can now access all the features of gitReleaser.')
-    with open('key.txt', 'w') as setup:
+        print("> The GitHub access token you specified is incorrect, please specify a correct one.")
+        token = input("> Enter your GitHub access token: ")
+    print("> Perfect! The access token that you specified is correct, and you can now access all the features of gitReleaser.")
+    with open("key.txt", "w") as setup:
         setup.write(token)
     return token
 
 def checkKey(key):
-    if get('https://api.github.com/', headers={'Authorization': f'token {key}'}).headers['X-RateLimit-Limit'] == '60':
+    if get("https://api.github.com/", headers={"Authorization": f"token {key}"}).headers["X-RateLimit-Limit"] == "60":
         return False
     return True
 
