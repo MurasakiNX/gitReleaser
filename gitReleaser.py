@@ -13,12 +13,12 @@ def human_size(bytes, units=[' bytes','KB','MB','GB','TB', 'PB', 'EB']):
 def setup():
     if exists('key.txt'):
         remove('key.txt')
-    print("Welcome to the configuration menu, for the software to work properly, you need your GitHub access token, to retrieve it please refer to the following help site: https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token you will need to copy the generated token and put it below (Please uncheck all options when creating your token, gitReleaser doesn't need it).")
+    print("> Welcome to the configuration menu, for the software to work properly, you need your GitHub access token, to retrieve it please refer to the following help site: https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token you will need to copy the generated token and put it below (Please uncheck all options when creating your token, gitReleaser doesn't need it).")
     token = input('\n> Enter your GitHub access token: ')
     while not checkKey(token):
-        print('The GitHub access token you specified is incorrect, please specify a correct one.')
+        print('> The GitHub access token you specified is incorrect, please specify a correct one.')
         token = input('> Enter your GitHub access token: ')
-    print('Perfect! The access token that you specified is correct, and you can now access all the features of gitReleaser.')
+    print('> Perfect! The access token that you specified is correct, and you can now access all the features of gitReleaser.')
     with open('key.txt', 'w') as setup:
         setup.write(token)
     return token
@@ -42,13 +42,13 @@ while True:
     """)
         if token == "":
             if not exists("key.txt") or not isfile("key.txt"):
-                print(f"Welcome {getuser()} on gitReleaser !\nWe notice that you haven't configured the software yet.\nThat's why you will be redirected to the configuration menu.\n")
+                print(f"> Welcome {getuser()} on gitReleaser ! We notice that you haven't configured the software yet. That's why you will be redirected to the configuration menu.\n")
                 token = setup()
             else:
                 with open("key.txt", "r") as key:
                     token = key.read()
                     if not checkKey(token):
-                        print("The token in the key.txt file is incorrect or no longer valid according to GitHub, so you will return to the configuration menu.\n")
+                        print("> The token in the key.txt file is incorrect or no longer valid according to GitHub, so you will return to the configuration menu.\n")
                         token = setup()
         author = input("\n> Enter the repo author's name: ")
         name = input("> Enter the repo's name: ")
