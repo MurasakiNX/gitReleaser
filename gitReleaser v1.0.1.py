@@ -95,7 +95,7 @@ while True:
                             path = getcwd()
                             print(f"> You have cancelled the selection of a folder, the files will be downloaded here: {path}")
                         raw = input("> Do you want a folder to be created with the downloaded files inside? [Y/n] ")
-                        if customPath.upper() == "Y":
+                        if raw.upper() == "Y":
                             path = f"{path}/{name}"
                             if not exists(path) or not isdir(path):
                                 mkdir(path)
